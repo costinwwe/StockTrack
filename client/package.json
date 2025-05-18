@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm install @rollup/rollup-linux-x64-gnu && vite build",
     "preview": "vite preview",
     "postinstall": "npm rebuild rollup"
   },
@@ -16,6 +16,7 @@
     "@handsontable/react": "^15.3.0",
     "@hello-pangea/dnd": "^18.0.1",
     "@paypal/react-paypal-js": "^8.8.3",
+    "@rollup/rollup-linux-x64-gnu": "^4.9.5",
     "@stripe/react-stripe-js": "^3.6.0",
     "@stripe/stripe-js": "^7.2.0",
     "@testing-library/jest-dom": "^5.17.0",
