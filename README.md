@@ -14,41 +14,46 @@ A modern inventory management system built with React, Node.js, and MongoDB.
 
 ## Tech Stack
 
-- **Frontend**: React, Redux, SCSS
+- **Frontend**: React, Vite, SCSS
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
 - **Authentication**: JWT
 - **Payment**: Stripe
 - **Email**: Nodemailer
 
-## Deployment
+## Deployment (Netlify)
 
-### Frontend (GitHub Pages)
-1. Install dependencies:
-```bash
-cd client
-npm install
-```
+### 1. Prerequisites
+- Make sure you have a Netlify account: https://app.netlify.com/
+- Your repository should have the following structure:
+  ```
+  client/
+  server/
+  netlify.toml
+  ```
 
-2. Deploy to GitHub Pages:
-```bash
-npm run deploy
-```
+### 2. Environment Variables
+Set these in Netlify:
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_PUBLISHABLE_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- Any others your app requires
 
-The app will be available at: https://costinwwe.github.io/StockTrack
+### 3. Deploy
+1. Go to [Netlify](https://app.netlify.com/)
+2. Click "Add new site" > "Import an existing project"
+3. Choose GitHub and select your repository
+4. Configure the build settings:
+   - Base directory: `client`
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+5. Click "Deploy site"
 
-### Backend (Railway/Render)
-1. Deploy the backend to Railway or Render
-2. Set environment variables:
-   - `MONGODB_URI`
-   - `JWT_SECRET`
-   - `STRIPE_SECRET_KEY`
-   - Any others your app requires
-
-3. Update the frontend's API URL in `client/.env`:
-```
-VITE_API_URL=your_backend_url
-```
+### 4. Serverless Functions
+- Your backend API routes are automatically converted to serverless functions
+- They will be available at `/.netlify/functions/api/*`
 
 ## Local Development
 
@@ -86,7 +91,7 @@ npm install
 npm run dev
 
 # Start client (from client directory)
-npm start
+npm run dev
 ```
 
 ## Environment Variables
