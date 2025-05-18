@@ -21,68 +21,38 @@ A modern inventory management system built with React, Node.js, and MongoDB.
 - **Payment**: Stripe
 - **Email**: Nodemailer
 
-## Deployment (Railway)
+## Deployment
 
-### 1. Prerequisites
-- Make sure you have a Railway account: https://railway.app/
-- Your repository should have the following structure:
-  ```
-  client/
-  server/
-  railway.toml
-  package.json (root, for workspaces)
-  ```
-
-### 2. Root package.json (workspaces)
-Create a `package.json` in the root with:
-```json
-{
-  "name": "stocktrack-monorepo",
-  "private": true,
-  "workspaces": [
-    "client",
-    "server"
-  ]
-}
+### Frontend (GitHub Pages)
+1. Install dependencies:
+```bash
+cd client
+npm install
 ```
 
-### 3. Railway Configuration
-- The `railway.toml` file is already set up for monorepo deployment.
-- Health check endpoint is `/api/health`.
+2. Deploy to GitHub Pages:
+```bash
+npm run deploy
+```
 
-### 4. Environment Variables
-Set these in Railway:
-- `MONGODB_URI`
-- `JWT_SECRET`
-- `STRIPE_SECRET_KEY`
-- `REACT_APP_API_URL` (for frontend)
-- Any others your app requires
+The app will be available at: https://costinwwe.github.io/StockTrack
 
-### 5. Build & Start Commands
-Railway will use the commands in `railway.toml`:
-- **Build:** `cd client && npm install && npm run build && cd ../server && npm install`
-- **Start:** `cd server && npm start`
+### Backend (Railway/Render)
+1. Deploy the backend to Railway or Render
+2. Set environment variables:
+   - `MONGODB_URI`
+   - `JWT_SECRET`
+   - `STRIPE_SECRET_KEY`
+   - Any others your app requires
 
-### 6. Deploy
-- Push your code to GitHub.
-- Create a new Railway project from your repo.
-- Railway will build and deploy your app automatically.
-
----
+3. Update the frontend's API URL in `client/.env`:
+```
+VITE_API_URL=your_backend_url
+```
 
 ## Local Development
-- Run frontend: `cd client && npm install && npm start`
-- Run backend: `cd server && npm install && npm start`
-
----
-
-## License
-MIT
-
-## Getting Started
 
 ### Prerequisites
-
 - Node.js (v14 or higher)
 - MongoDB
 - npm or yarn
@@ -157,6 +127,9 @@ STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+## License
+MIT
 
 ## Contact
 
