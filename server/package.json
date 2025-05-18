@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "cd client && npm run build",
     "deploy": "netlify deploy --prod"
   },
   "keywords": [
