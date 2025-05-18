@@ -1,0 +1,22 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd client && npm install && npm run build && cd ../server && npm install"
+
+[deploy]
+startCommand = "cd server && npm start"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 100
+restartPolicyType = "on-failure"
+restartPolicyMaxRetries = 10
+
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.install]
+cmds = ["cd client && npm install", "cd ../server && npm install"]
+
+[phases.build]
+cmds = ["cd client && npm run build"]
+
+[phases.start]
+cmds = ["cd server && npm start"] 

@@ -79,6 +79,11 @@ const initializeRoutes = () => {
 // Initialize routes immediately
 initializeRoutes();
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 // Error handler middleware
 app.use((err, req, res, next) => {
   console.error('Error details:', err);
