@@ -1,0 +1,345 @@
+@import './variables';
+
+// Contact Page Styling
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-xl;
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-md;
+  }
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  
+  h1 {
+    color: $secondary-color;
+    margin-bottom: $spacing-sm;
+    font-weight: $font-weight-bold;
+    font-size: 2.5rem;
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: 2rem;
+    }
+  }
+  
+  p {
+    color: $text-secondary;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+.contact-content {
+  display: flex;
+  gap: $spacing-xl;
+  
+  @media (max-width: $breakpoint-lg) {
+    flex-direction: column;
+  }
+}
+
+// Form Section
+.contact-form-section {
+  flex: 3;
+  background-color: $light-color;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $box-shadow-sm;
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg;
+  }
+}
+
+.form-header {
+  margin-bottom: $spacing-lg;
+  
+  h2 {
+    color: $secondary-color;
+    margin-bottom: $spacing-xs;
+    font-size: 1.75rem;
+  }
+  
+  p {
+    color: $text-secondary;
+  }
+}
+
+.submit-status {
+  padding: $spacing-md;
+  border-radius: $border-radius;
+  margin-bottom: $spacing-lg;
+  font-weight: $font-weight-bold;
+  
+  &.success {
+    background-color: rgba($success-color, 0.1);
+    color: $success-color;
+    border: 1px solid rgba($success-color, 0.2);
+  }
+  
+  &.error {
+    background-color: rgba($danger-color, 0.1);
+    color: $danger-color;
+    border: 1px solid rgba($danger-color, 0.2);
+  }
+}
+
+.contact-form {
+  .form-row {
+    display: flex;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+    
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+    
+    .form-group {
+      flex: 1;
+    }
+  }
+  
+  .form-group {
+    margin-bottom: $spacing-md;
+    
+    label {
+      display: block;
+      margin-bottom: $spacing-xs;
+      color: $text-color;
+      font-weight: $font-weight-bold;
+      
+      .required {
+        color: $danger-color;
+      }
+    }
+    
+    .input-with-icon {
+      position: relative;
+      
+      .icon {
+        position: absolute;
+        left: $spacing-sm;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $text-secondary;
+      }
+      
+      input {
+        padding-left: 2.5rem;
+      }
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: $spacing-sm $spacing-md;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      font-family: $font-family-base;
+      font-size: $font-size-base;
+      transition: $transition;
+      
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+      }
+      
+      &.error {
+        border-color: $danger-color;
+      }
+      
+      &::placeholder {
+        color: lighten($text-secondary, 20%);
+      }
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .error-message {
+      color: $danger-color;
+      font-size: 0.875rem;
+      margin-top: $spacing-xs;
+    }
+  }
+  
+  .submit-btn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+    padding: $spacing-sm $spacing-lg;
+    font-size: 1rem;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    transition: $transition;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: $spacing-lg;
+    
+    .btn-icon {
+      margin-right: $spacing-sm;
+    }
+    
+    &:hover {
+      background-color: $primary-dark;
+    }
+    
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+// Contact Info Section
+.contact-info-section {
+  flex: 2;
+  background-color: $light-color;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $box-shadow-sm;
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg;
+  }
+}
+
+.info-header {
+  margin-bottom: $spacing-lg;
+  
+  h2 {
+    color: $secondary-color;
+    margin-bottom: $spacing-xs;
+    font-size: 1.75rem;
+  }
+  
+  p {
+    color: $text-secondary;
+  }
+}
+
+.info-content {
+  margin-bottom: $spacing-xl;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: $spacing-lg;
+  
+  .info-icon {
+    color: $primary-color;
+    font-size: 1.5rem;
+    margin-right: $spacing-md;
+    margin-top: $spacing-xs;
+  }
+  
+  .info-text {
+    h3 {
+      color: $secondary-color;
+      margin-bottom: $spacing-xs;
+      font-size: 1.2rem;
+    }
+    
+    p {
+      color: $text-secondary;
+      line-height: 1.5;
+      margin: 0;
+      
+      a {
+        color: $accent-color;
+        text-decoration: none;
+        transition: $transition;
+        
+        &:hover {
+          color: $accent-dark;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.social-links {
+  margin-bottom: $spacing-lg;
+  
+  h3 {
+    color: $secondary-color;
+    margin-bottom: $spacing-md;
+    font-size: 1.2rem;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: $spacing-md;
+    
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      color: $primary-color;
+      border-radius: 50%;
+      font-size: 1.25rem;
+      transition: $transition;
+      box-shadow: $box-shadow-sm;
+      
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+        transform: translateY(-3px);
+      }
+    }
+  }
+}
+
+.map-container {
+  .map-placeholder {
+    height: 200px;
+    background-color: #e9ecef;
+    border-radius: $border-radius;
+    position: relative;
+    overflow: hidden;
+    
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .map-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba($light-color, 0.8);
+      color: $text-secondary;
+      font-weight: $font-weight-bold;
+    }
+  }
+}

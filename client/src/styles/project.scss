@@ -1,0 +1,1594 @@
+@import "./variables";
+
+@mixin button-style($bg, $color) {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  background: $bg;
+  color: $color;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  &:hover { background: darken($bg, 10%); }
+}
+
+.project-container {
+  font-family: $font-family-base;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-md;
+  min-height: calc(100vh - 80px); // Adjust based on your header height
+  background: $light-color;
+  
+  // Loading and error states
+  .loading, .error {
+    text-align: center;
+    padding: $spacing-lg 0;
+    font-size: 1.1rem;
+    
+    &.error {
+      color: $danger-color;
+      background: rgba($danger-color, 0.08);
+      border-radius: $border-radius;
+      margin: $spacing-md 0;
+    }
+  }
+  
+  .back-btn {
+    @include button-style($secondary-color, white);
+    margin-left: $spacing-sm;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    
+    svg {
+      font-size: 0.9rem;
+    }
+  }
+  
+  // Save button
+  .save-btn {
+    @include button-style($text-secondary, white);
+    margin-right: $spacing-sm;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    
+    svg {
+      font-size: 1rem;
+    }
+    
+    &.has-changes {
+      background: $success-color;
+      animation: pulse 2s infinite;
+      
+      &:hover {
+        background: darken($success-color, 10%);
+      }
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+  
+  // Unsaved changes alert
+  .unsaved-changes-alert {
+    background: rgba($warning-color, 0.15);
+    border-left: 4px solid $warning-color;
+    padding: $spacing-sm $spacing-md;
+    margin-bottom: $spacing-md;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0 $border-radius $border-radius 0;
+    
+    button {
+      @include button-style($warning-color, #fff);
+      font-weight: 500;
+      padding: $spacing-xs $spacing-md;
+    }
+  }
+  
+  // Sidebar toggle button - positioned in middle right
+  .sidebar-toggle {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 60px;
+    background: $primary-color;
+    color: white;
+    border: none;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    cursor: pointer;
+    z-index: $z-index-fixed + 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
+    font-size: 1rem;
+    
+    // Show ">" when sidebar is closed, "<" when open
+    &::after {
+      content: ">";
+    }
+    
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+  }
+  
+  // Change the content when sidebar is open
+  .project-sidebar.open + .project-main .sidebar-toggle::after {
+    content: "<";
+  }
+  
+  // Sidebar - now on the left side
+  .project-sidebar {
+    position: fixed;
+    left: -340px;
+    top: 0;
+    width: 340px;
+    height: 100vh;
+    background: white;
+    box-shadow: 4px 0 24px 0 rgba(0,0,0,0.12);
+    transition: left 0.3s cubic-bezier(0.77,0,0.18,1), box-shadow 0.3s;
+    z-index: $z-index-fixed;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    &.open {
+      left: 0;
+      box-shadow: 4px 0 24px 0 rgba(0,0,0,0.18);
+    }
+    
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $spacing-md;
+      border-bottom: 1px solid $border-color;
+      background: $primary-color;
+      
+      h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: white;
+        letter-spacing: 0.01em;
+      }
+      
+      .close-btn {
+        border: none;
+        background: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: white;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+    
+    // New sidebar navigation
+    .sidebar-nav {
+      display: flex;
+      overflow-x: auto;
+      border-bottom: 1px solid $border-color;
+      background: $light-color;
+      
+      .nav-btn {
+        flex: 1;
+        padding: $spacing-sm 0;
+        border: none;
+        background: none;
+        color: $text-secondary;
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $spacing-xs;
+        transition: background 0.2s, color 0.2s;
+        
+        svg {
+          font-size: 1.1rem;
+        }
+        
+        &.active {
+          color: $primary-color;
+          border-bottom: 2px solid $primary-color;
+          background: rgba($primary-color, 0.05);
+        }
+        
+        &:hover:not(.active) {
+          background: $light-color;
+          color: $text-color;
+        }
+      }
+    }
+    
+    .sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: $spacing-md;
+      
+      // Table Manager Section
+      .table-manager {
+        h4 {
+          margin: 0 0 $spacing-md;
+          font-size: 1rem;
+          color: $text-color;
+          border-bottom: 1px solid $border-color;
+          padding-bottom: $spacing-xs;
+          font-weight: $font-weight-bold;
+        }
+        
+        .tables-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 $spacing-md 0;
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+          
+          li {
+            display: flex;
+            align-items: center;
+            padding: $spacing-sm;
+            border-radius: $border-radius;
+            background: $light-color;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            border: 1px solid $border-color;
+            gap: $spacing-sm;
+            
+            .table-icon {
+              color: $primary-color;
+              font-size: 1rem;
+            }
+            
+            .table-name {
+              flex: 1;
+              font-size: 0.95rem;
+            }
+            
+            &.active {
+              background: rgba($primary-color, 0.08);
+              border-color: $primary-color;
+              transform: translateX(4px);
+              
+              .table-icon {
+                color: $primary-color;
+              }
+            }
+            
+            &:hover:not(.active) {
+              background: rgba($primary-color, 0.04);
+              transform: translateX(2px);
+            }
+            
+            .table-actions {
+              display: flex;
+              gap: $spacing-xs;
+              
+              button {
+                background: none;
+                border: none;
+                padding: $spacing-xs;
+                border-radius: $border-radius;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+                
+                &.rename-btn {
+                  color: $accent-color;
+                  
+                  &:hover {
+                    background: rgba($accent-color, 0.1);
+                  }
+                }
+                
+                &.delete-btn {
+                  color: $danger-color;
+                  
+                  &:hover {
+                    background: rgba($danger-color, 0.1);
+                  }
+                }
+                
+                &:disabled {
+                  opacity: 0.5;
+                  cursor: not-allowed;
+                }
+              }
+            }
+          }
+        }
+        
+        .add-table-btn, .excel-export-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          padding: $spacing-sm;
+          margin-bottom: $spacing-sm;
+          background: rgba($primary-color, 0.1);
+          color: $primary-color;
+          border: 1px dashed $primary-color;
+          border-radius: $border-radius;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s;
+          gap: $spacing-xs;
+          
+          &:hover {
+            background: rgba($primary-color, 0.2);
+            transform: translateY(-2px);
+          }
+          
+          svg {
+            font-size: 1rem;
+          }
+        }
+        
+        .excel-export-btn {
+          background: rgba($accent-color, 0.1);
+          color: $accent-color;
+          border: 1px dashed $accent-color;
+          
+          &:hover {
+            background: rgba($accent-color, 0.2);
+          }
+        }
+      }
+      
+      // Column Manager
+      .column-manager {
+        h4, h5 {
+          margin: 0 0 $spacing-md;
+          font-size: 1rem;
+          color: $text-color;
+          border-bottom: 1px solid $border-color;
+          padding-bottom: $spacing-xs;
+          font-weight: $font-weight-bold;
+        }
+        
+        h5 {
+          font-size: 0.9rem;
+          margin-bottom: $spacing-sm;
+          color: $text-secondary;
+          border-bottom-style: dashed;
+        }
+        
+        .add-column-btn, .add-index-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          padding: $spacing-sm;
+          margin-bottom: $spacing-sm;
+          background: rgba($primary-color, 0.1);
+          color: $primary-color;
+          border: 1px dashed $primary-color;
+          border-radius: $border-radius;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s;
+          gap: $spacing-xs;
+          
+          svg {
+            font-size: 1rem;
+          }
+          
+          &:hover {
+            background: rgba($primary-color, 0.2);
+            transform: translateY(-2px);
+          }
+        }
+        
+        .columns-list {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+          margin-bottom: $spacing-md;
+          max-height: 240px;
+          overflow-y: auto;
+          
+          .column-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: $spacing-sm;
+            border-radius: $border-radius;
+            background: $light-color;
+            border: 1px solid $border-color;
+            
+            .column-info {
+              display: flex;
+              align-items: center;
+              gap: $spacing-sm;
+              
+              .column-type-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+                background: rgba($primary-color, 0.1);
+                border-radius: $border-radius;
+                font-size: 0.8rem;
+                color: $primary-color;
+              }
+              
+              .column-name {
+                font-weight: 500;
+              }
+              
+              .column-type {
+                font-size: 0.8rem;
+                color: $text-secondary;
+              }
+            }
+            
+            .column-actions {
+              display: flex;
+              gap: $spacing-xs;
+              
+              button {
+                background: none;
+                border: none;
+                padding: $spacing-xs;
+                border-radius: $border-radius;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+                
+                &.sort-btn {
+                  color: $primary-color;
+                  
+                  &:hover {
+                    background: rgba($primary-color, 0.1);
+                  }
+                }
+                
+                &.visibility-btn {
+                  color: $accent-color;
+                  
+                  &:hover {
+                    background: rgba($accent-color, 0.1);
+                  }
+                }
+                
+                &.rename-btn {
+                  color: $info-color;
+                  
+                  &:hover {
+                    background: rgba($info-color, 0.1);
+                  }
+                }
+                
+                &.delete-btn {
+                  color: $danger-color;
+                  
+                  &:hover {
+                    background: rgba($danger-color, 0.1);
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        .column-actions-group {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+          
+          button {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            padding: $spacing-sm;
+            background: $light-color;
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            color: $text-color;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            
+            svg {
+              font-size: 1rem;
+              color: $primary-color;
+            }
+            
+            &:hover {
+              background: $light-color;
+              border-color: $primary-color;
+              color: $primary-color;
+            }
+          }
+        }
+      }
+      
+      // Row Manager
+      .row-manager {
+        h4, h5 {
+          margin: 0 0 $spacing-md;
+          font-size: 1rem;
+          color: $text-color;
+          border-bottom: 1px solid $border-color;
+          padding-bottom: $spacing-xs;
+          font-weight: $font-weight-bold;
+        }
+        
+        h5 {
+          font-size: 0.9rem;
+          margin-bottom: $spacing-sm;
+          color: $text-secondary;
+          border-bottom-style: dashed;
+        }
+        
+        .add-row-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          padding: $spacing-sm;
+          margin-bottom: $spacing-sm;
+          background: rgba($primary-color, 0.1);
+          color: $primary-color;
+          border: 1px dashed $primary-color;
+          border-radius: $border-radius;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s;
+          gap: $spacing-xs;
+          
+          svg {
+            font-size: 1rem;
+          }
+          
+          &:hover {
+            background: rgba($primary-color, 0.2);
+            transform: translateY(-2px);
+          }
+        }
+        
+        .row-actions-group {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+          margin-bottom: $spacing-md;
+          
+          button {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            padding: $spacing-sm;
+            background: $light-color;
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            color: $text-color;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            
+            &:hover:not(:disabled) {
+              background: $light-color;
+              border-color: $primary-color;
+              color: $primary-color;
+            }
+            
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+            }
+          }
+        }
+        
+        .rows-list {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+          max-height: 240px;
+          overflow-y: auto;
+          
+          .row-item {
+            display: flex;
+            align-items: center;
+            padding: $spacing-sm;
+            border-radius: $border-radius;
+            background: $light-color;
+            border: 1px solid $border-color;
+            transition: all 0.2s;
+            cursor: pointer;
+            
+            .row-number {
+              width: 30px;
+              text-align: center;
+              background: rgba($primary-color, 0.1);
+              border-radius: $border-radius;
+              padding: $spacing-xs;
+              font-size: 0.8rem;
+              font-weight: 600;
+              color: $primary-color;
+              margin-right: $spacing-sm;
+            }
+            
+            .row-preview {
+              flex: 1;
+              font-size: 0.9rem;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            
+            .row-actions {
+              display: flex;
+              gap: $spacing-xs;
+              
+              button {
+                background: none;
+                border: none;
+                padding: $spacing-xs;
+                border-radius: $border-radius;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+                
+                &.duplicate-btn {
+                  color: $primary-color;
+                  
+                  &:hover {
+                    background: rgba($primary-color, 0.1);
+                  }
+                }
+                
+                &.delete-btn {
+                  color: $danger-color;
+                  
+                  &:hover {
+                    background: rgba($danger-color, 0.1);
+                  }
+                }
+              }
+            }
+            
+            &.selected {
+              background: rgba($primary-color, 0.08);
+              border-color: $primary-color;
+              transform: translateX(4px);
+            }
+            
+            &:hover:not(.selected) {
+              background: rgba($primary-color, 0.04);
+              transform: translateX(2px);
+            }
+          }
+        }
+        
+        .empty-table-message {
+          padding: $spacing-lg;
+          text-align: center;
+          background: $light-color;
+          border: 1px dashed $border-color;
+          border-radius: $border-radius;
+          color: $text-secondary;
+          font-style: italic;
+        }
+      }
+      
+      // Formula Manager
+      .formula-manager {
+        h4, h5 {
+          margin: 0 0 $spacing-md;
+          font-size: 1rem;
+          color: $text-color;
+          border-bottom: 1px solid $border-color;
+          padding-bottom: $spacing-xs;
+          font-weight: $font-weight-bold;
+        }
+        
+        h5 {
+          font-size: 0.9rem;
+          margin-bottom: $spacing-sm;
+          color: $text-secondary;
+          border-bottom-style: dashed;
+        }
+        
+        .formula-info {
+          padding: $spacing-md;
+          background: $light-color;
+          border-radius: $border-radius;
+          margin-bottom: $spacing-md;
+          
+          p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: $text-secondary;
+            line-height: 1.5;
+          }
+        }
+        
+        .formula-examples {
+          padding: $spacing-md;
+          background: $light-color;
+          border-radius: $border-radius;
+          margin-bottom: $spacing-md;
+          
+          ul {
+            margin: $spacing-xs 0 0 0;
+            padding-left: $spacing-lg;
+            
+            li {
+              margin-bottom: $spacing-xs;
+              font-size: 0.9rem;
+              
+              code {
+                background: rgba($primary-color, 0.08);
+                color: $primary-color;
+                padding: 0 $spacing-xs;
+                border-radius: $border-radius / 2;
+                font-family: monospace;
+              }
+            }
+          }
+        }
+        
+        .formula-bar-toggle {
+          margin-bottom: $spacing-md;
+          
+          button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: $spacing-xs;
+            padding: $spacing-sm;
+            background: rgba($accent-color, 0.1);
+            color: $accent-color;
+            border: 1px solid $accent-color;
+            border-radius: $border-radius;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            
+            &:hover {
+              background: rgba($accent-color, 0.2);
+            }
+          }
+        }
+        
+        .current-cell-info {
+          padding: $spacing-md;
+          background: $light-color;
+          border-radius: $border-radius;
+          
+          h5 {
+            margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+          
+          p {
+            font-size: 0.9rem;
+            color: $text-secondary;
+            margin-bottom: $spacing-sm;
+          }
+          
+          .formula-input {
+            display: flex;
+            gap: $spacing-xs;
+            
+            input {
+              flex: 1;
+              padding: $spacing-sm;
+              border: 1px solid $border-color;
+              border-radius: $border-radius;
+              font-size: 0.95rem;
+              
+              &:focus {
+                outline: none;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+              }
+            }
+            
+            button {
+              padding: $spacing-sm;
+              background: $primary-color;
+              color: white;
+              border: none;
+              border-radius: $border-radius;
+              cursor: pointer;
+              transition: all 0.2s;
+              
+              &:hover {
+                background: darken($primary-color, 10%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Main content area
+  .project-main {
+    transition: margin-left 0.3s;
+    
+    &.sidebar-open {
+      margin-left: 340px;
+    }
+    
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: $spacing-lg;
+      flex-wrap: wrap;
+      gap: $spacing-md;
+      
+      h2 {
+        margin: 0;
+        font-size: 2rem;
+        color: $text-color;
+        font-weight: $font-weight-bold;
+      }
+      
+      .table-name {
+        font-size: 1.2rem;
+        color: $text-secondary;
+        font-weight: 500;
+      }
+      
+      .actions {
+        display: flex;
+        gap: $spacing-sm;
+      }
+      
+      // Formula Bar
+      .formula-bar {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm;
+        background: $light-color;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        width: 100%;
+        margin-top: $spacing-sm;
+        
+        .cell-reference {
+          font-family: monospace;
+          width: 60px;
+          text-align: center;
+          padding: $spacing-xs $spacing-sm;
+          background: white;
+          border: 1px solid $border-color;
+          border-radius: $border-radius;
+          font-weight: 600;
+        }
+        
+        .formula-input {
+          flex: 1;
+          padding: $spacing-xs $spacing-sm;
+          border: 1px solid $border-color;
+          border-radius: $border-radius;
+          font-size: 0.95rem;
+          font-family: monospace;
+          
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+          }
+        }
+        
+        .apply-formula-btn {
+          padding: $spacing-xs $spacing-sm;
+          background: $primary-color;
+          color: white;
+          border: none;
+          border-radius: $border-radius;
+          cursor: pointer;
+          transition: all 0.2s;
+          
+          &:hover {
+            background: darken($primary-color, 10%);
+          }
+          
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+    
+    // Excel-like toolbar
+    .excel-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $spacing-sm;
+      background: $light-color;
+      border-radius: $border-radius;
+      margin-bottom: $spacing-md;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+      border: 1px solid $border-color;
+      
+      .toolbar-group {
+        display: flex;
+        gap: $spacing-xs;
+        
+        button {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          padding: $spacing-xs $spacing-sm;
+          background: white;
+          border: 1px solid $border-color;
+          border-radius: $border-radius;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.2s;
+          
+          svg {
+            font-size: 1rem;
+          }
+          
+          &:hover:not(:disabled) {
+            background: $light-color;
+            border-color: $primary-color;
+            color: $primary-color;
+          }
+          
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+          
+          &.save-btn {
+            background: $primary-color;
+            color: white;
+            border-color: $primary-color;
+            
+            &:hover:not(:disabled) {
+              background: darken($primary-color, 10%);
+              color: white;
+            }
+            
+            &:disabled {
+              background: $text-secondary;
+              border-color: $text-secondary;
+            }
+          }
+        }
+      }
+    }
+    
+    // Filters row
+    .filters-row {
+      margin-bottom: $spacing-md;
+      padding: $spacing-sm;
+      background: $light-color;
+      border-radius: $border-radius;
+      border: 1px solid $border-color;
+      
+      .filter-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-xs;
+        
+        .filter-item {
+          flex: 1;
+          min-width: 150px;
+          
+          label {
+            display: block;
+            font-size: 0.8rem;
+            color: $text-secondary;
+            margin-bottom: $spacing-xs / 2;
+          }
+          
+          input {
+            width: 100%;
+            padding: $spacing-xs $spacing-sm;
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            font-size: 0.9rem;
+            
+            &:focus {
+              outline: none;
+              border-color: $primary-color;
+              box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+            }
+          }
+        }
+        
+        .apply-filters-btn {
+          align-self: flex-end;
+          padding: $spacing-xs $spacing-md;
+          background: $primary-color;
+          color: white;
+          border: none;
+          border-radius: $border-radius;
+          cursor: pointer;
+          transition: all 0.2s;
+          
+          &:hover {
+            background: darken($primary-color, 10%);
+          }
+        }
+      }
+    }
+    
+    .table-actions {
+      display: flex;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-md;
+      
+      button {
+        @include button-style($primary-color, white);
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        
+        svg {
+          font-size: 1rem;
+        }
+        
+        &.add-column-btn {
+          background: $secondary-color;
+          
+          &:hover {
+            background: darken($secondary-color, 10%);
+          }
+        }
+        
+        &.add-table-btn {
+          background: $accent-color;
+          
+          &:hover {
+            background: darken($accent-color, 10%);
+          }
+        }
+      }
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      background: white;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-sm;
+      
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        
+        th, td {
+          padding: $spacing-sm;
+          border: 1px solid $border-color;
+          position: relative;
+          
+          &.empty-table {
+            text-align: center;
+            color: $text-secondary;
+            padding: $spacing-lg;
+          }
+        }
+        
+        th {
+          background: #f8f9fa;
+          font-weight: 600;
+          text-align: left;
+          position: sticky;
+          top: 0;
+          z-index: 1;
+          
+          &.row-number-header {
+            background: darken(#f8f9fa, 5%);
+            text-align: center;
+            width: 40px;
+            position: sticky;
+            left: 0;
+            z-index: 2;
+          }
+          
+          .column-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            .column-name {
+              flex: 1;
+            }
+            
+            .column-actions {
+              display: flex;
+              
+              button {
+                background: none;
+                border: none;
+                padding: 0;
+                margin-left: $spacing-xs;
+                color: $text-secondary;
+                cursor: pointer;
+                transition: color 0.2s;
+                
+                &:hover {
+                  color: $primary-color;
+                }
+              }
+            }
+          }
+        }
+        
+        td {
+          &.row-number {
+            background: darken(#f8f9fa, 2%);
+            text-align: center;
+            font-weight: 500;
+            color: $text-secondary;
+            width: 40px;
+            position: sticky;
+            left: 0;
+            z-index: 1;
+          }
+          
+          &.selected-cell {
+            background-color: rgba($primary-color, 0.1);
+            outline: 2px solid $primary-color;
+          }
+          
+          &.freeze-column {
+            position: sticky;
+            left: 40px;
+            background-color: white;
+            z-index: 1;
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.05);
+          }
+          
+          &.number {
+            text-align: right;
+          }
+          
+          &.date {
+            text-align: center;
+          }
+          
+          input {
+            width: 100%;
+            padding: $spacing-xs $spacing-sm;
+            border: 1px solid transparent;
+            border-radius: $border-radius;
+            font-size: 0.95rem;
+            background: transparent;
+            
+            &:focus {
+              outline: none;
+              border-color: $primary-color;
+              background: white;
+              box-shadow: 0 0 0 2px rgba($primary-color, 0.15);
+            }
+          }
+          
+          span.formula-cell {
+            color: $accent-color;
+            font-family: monospace;
+          }
+        }
+        
+        tr {
+          &.selected-row {
+            background: rgba($primary-color, 0.05) !important;
+          }
+          
+          &:nth-child(even) {
+            background: #f8f9fa;
+          }
+          
+          &:hover {
+            background: rgba($primary-color, 0.05);
+          }
+        }
+      }
+    }
+  }
+  
+  // Modal styles
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: $z-index-modal;
+    
+    .modal {
+      background: white;
+      border-radius: $border-radius-lg;
+      box-shadow: $box-shadow;
+      width: 400px;
+      max-width: 95vw;
+      
+      .modal-header {
+        padding: $spacing-md;
+        border-bottom: 1px solid $border-color;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        h3 {
+          margin: 0;
+          font-size: 1.2rem;
+          color: $primary-color;
+        }
+        
+        .close-modal-btn {
+          border: none;
+          background: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+          color: $text-secondary;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          &:hover {
+            color: $text-color;
+          }
+        }
+      }
+      
+      .modal-body {
+        padding: $spacing-md;
+        
+        .form-group {
+          margin-bottom: $spacing-md;
+          
+          label {
+            display: block;
+            margin-bottom: $spacing-xs;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: $text-secondary;
+          }
+          
+          input, select {
+            width: 100%;
+            padding: $spacing-sm;
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            font-size: 0.95rem;
+            
+            &:focus {
+              outline: none;
+              border-color: $primary-color;
+              box-shadow: 0 0 0 2px rgba($primary-color, 0.15);
+            }
+          }
+        }
+        
+        // Export options
+        .export-options {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-xs;
+          
+          label {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            font-size: 0.95rem;
+            cursor: pointer;
+            
+            input[type="checkbox"] {
+              width: auto;
+            }
+          }
+        }
+      }
+      
+      .modal-footer {
+        padding: $spacing-md;
+        border-top: 1px solid $border-color;
+        display: flex;
+        justify-content: flex-end;
+        gap: $spacing-sm;
+        
+        button {
+          @include button-style($primary-color, white);
+          
+          &.cancel-btn {
+            background: #f8f9fa;
+            color: $text-color;
+            
+            &:hover {
+              background: darken(#f8f9fa, 5%);
+            }
+          }
+          
+          &.confirm-btn {
+            background: $primary-color;
+            color: white;
+            
+            &:hover {
+              background: darken($primary-color, 10%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Pulsing animation for save button
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba($success-color, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba($success-color, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($success-color, 0);
+  }
+}
+
+// Responsive styles
+@media (max-width: $breakpoint-lg) {
+  .project-container {
+    .project-main {
+      margin-left: 0 !important;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .project-container {
+    padding: $spacing-sm;
+    
+    .project-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-sm;
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .table-name {
+        font-size: 1rem;
+      }
+      
+      .actions {
+        width: 100%;
+        
+        .back-btn, .save-btn {
+          flex: 1;
+          
+          span {
+            display: none;
+          }
+        }
+      }
+      
+      .formula-bar {
+        flex-wrap: wrap;
+        
+        .cell-reference {
+          width: 50px;
+        }
+      }
+    }
+    
+    .excel-toolbar {
+      .toolbar-group {
+        button {
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+    
+    .table-actions {
+      flex-wrap: wrap;
+      
+      button {
+        flex: 1;
+        font-size: 0.9rem;
+        padding: $spacing-xs $spacing-sm;
+      }
+    }
+    
+    .project-sidebar {
+      width: 85%;
+      max-width: 300px;
+    }
+    
+    // Keep sidebar toggle on right side but make it larger for mobile
+    .sidebar-toggle {
+      width: 30px;
+      height: 70px;
+      font-size: 1.2rem;
+    }
+    
+    .table-container {
+      .data-table {
+        th, td {
+          padding: $spacing-xs;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .project-container {
+    padding: $spacing-xs;
+    
+    .project-main {
+      .project-header {
+        h2 {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    
+    .excel-toolbar {
+      padding: $spacing-xs;
+      
+      .toolbar-group {
+        button {
+          padding: $spacing-xs;
+          
+          svg {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+    
+    .table-container {
+      .data-table {
+        th, td {
+          padding: $spacing-xs / 2;
+          font-size: 0.85rem;
+          
+          input {
+            padding: $spacing-xs / 2;
+          }
+        }
+      }
+    }
+  }
+}
+
+.project-info {
+  padding: 1rem;
+  
+  .info-section {
+    margin-bottom: 2rem;
+    
+    h4 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+  }
+  
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    
+    &.sub-item {
+      margin-left: 1rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .info-label {
+      color: #666;
+      font-weight: 500;
+    }
+    
+    .info-value {
+      color: #333;
+      font-weight: 400;
+    }
+  }
+  
+  .table-stats {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    
+    .info-item {
+      margin-bottom: 0.5rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background: #f8f9fa;
+    color: #333;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: #e9ecef;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    svg {
+      font-size: 1rem;
+    }
+    
+    &:first-child {
+      color: #dc3545;
+      
+      &:hover {
+        background: #dc3545;
+        color: white;
+      }
+    }
+  }
+}

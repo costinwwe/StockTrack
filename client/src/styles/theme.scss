@@ -1,0 +1,62 @@
+@import './variables';
+
+// Dark mode variables
+:root {
+  --bg-primary: #{$background-color};
+  --bg-secondary: #{$light-color};
+  --text-primary: #{$text-color};
+  --text-secondary: #{$text-secondary};
+  --border-color: #{$border-color};
+}
+
+// Dark mode styles
+.dark-mode {
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --text-primary: #f7fafc;
+  --text-secondary: #a0aec0;
+  --border-color: #4a5568;
+}
+
+// Apply theme variables
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Dark mode specific component styles
+.dark-mode {
+  .navbar {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .card, .modal-container {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+  }
+
+  input, textarea, select {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+
+  .dropdown-menu {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+
+    .dropdown-item {
+      color: var(--text-primary);
+
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+      }
+    }
+  }
+} 

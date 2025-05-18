@@ -1,0 +1,296 @@
+@import 'variables';
+
+.get-pro-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: $text-color;
+  
+  .pro-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    
+    .pro-icon {
+      font-size: 3rem;
+      color: $primary-color;
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: $primary-color;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: $text-secondary;
+    }
+  }
+  
+  .pricing-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    
+    .toggle-button {
+      padding: 0.8rem 2rem;
+      background: none;
+      border: 1px solid $border-color;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      
+      &:first-child {
+        border-radius: 4px 0 0 4px;
+      }
+      
+      &:last-child {
+        border-radius: 0 4px 4px 0;
+      }
+      
+      &.active {
+        background-color: $primary-color;
+        color: white;
+        border-color: $primary-color;
+      }
+      
+      .savings-badge {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: $accent-color;
+        color: white;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  .pricing-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    
+    .pricing-card {
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+      
+      &.pro {
+        border: 2px solid $primary-color;
+        position: relative;
+        transform: scale(1.05);
+        
+        .pro-badge {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background-color: $primary-color;
+          color: white;
+          padding: 4px 10px;
+          border-radius: 4px;
+          font-weight: bold;
+          font-size: 0.8rem;
+        }
+      }
+      
+      .card-header {
+        padding: 2rem;
+        background-color: #f8f9fa;
+        text-align: center;
+        
+        h2 {
+          font-size: 1.8rem;
+          margin-bottom: 1rem;
+        }
+        
+        .price {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          
+          .amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: $primary-color;
+          }
+          
+          .period {
+            color: $text-secondary;
+            font-size: 0.9rem;
+          }
+        }
+      }
+      
+      .card-content {
+        padding: 2rem;
+        
+        .features-list {
+          list-style: none;
+          padding: 0;
+          margin-bottom: 2rem;
+          
+          li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            
+            .check-icon {
+              color: $success-color;
+              margin-right: 10px;
+              flex-shrink: 0;
+            }
+            
+            .x-icon {
+              color: $danger-color;
+              margin-right: 10px;
+              flex-shrink: 0;
+            }
+          }
+        }
+        
+        .current-plan-button {
+          width: 100%;
+          padding: 1rem;
+          background-color: #f1f2f3;
+          color: $text-secondary;
+          border: none;
+          border-radius: 4px;
+          font-weight: 600;
+          cursor: default;
+        }
+        
+        .upgrade-button {
+          width: 100%;
+          padding: 1rem;
+          background-color: $primary-color;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-weight: 600;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: background-color 0.3s ease;
+          
+          &:hover {
+            background-color: darken($primary-color, 10%);
+          }
+          
+          &:disabled {
+            background-color: lighten($primary-color, 20%);
+            cursor: not-allowed;
+          }
+          
+          .card-icon {
+            margin-left: 10px;
+          }
+        }
+        
+        .error-message {
+          color: $danger-color;
+          margin-top: 1rem;
+          text-align: center;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  
+  .security-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    
+    .lock-icon {
+      color: $text-secondary;
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    
+    p {
+      color: $text-secondary;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+  
+  .faq-section {
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: $primary-color;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      
+      .faq-item {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        
+        h3 {
+          margin-top: 0;
+          margin-bottom: 1rem;
+          color: $text-color;
+          font-size: 1.2rem;
+        }
+        
+        p {
+          color: $text-secondary;
+          margin: 0;
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .get-pro-container {
+    padding: 1rem;
+    
+    .pro-header {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+    
+    .pricing-container {
+      .pricing-card {
+        &.pro {
+          transform: none;
+        }
+      }
+    }
+    
+    .faq-section {
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+} 

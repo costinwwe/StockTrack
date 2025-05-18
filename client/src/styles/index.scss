@@ -1,0 +1,14 @@
+/* src/styles/collaboration/index.scss */
+// Import all collaboration module styles
+
+// Variables first
+@import './variables';
+
+// Components
+@import './collaboration-hub';
+@import './team-list';
+@import './team-detail';
+@import './shared-projects';
+@import './shared-project-view';
+@import './project-comments';
+@import './modals';

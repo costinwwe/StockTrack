@@ -1,0 +1,415 @@
+.pricing-section {
+  padding: 80px 0;
+  background-color: #f7fafc;
+}
+
+.pricing-section .pricing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.pricing-section .pricing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pricing-section .pricing-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a202c;
+}
+
+.pricing-section .pricing-header p {
+  font-size: 1.1rem;
+  color: #404f6c;
+  margin-bottom: 2rem;
+}
+
+.pricing-section .pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.pricing-section .pricing-toggle span {
+  font-size: 1rem;
+  color: #53668c;
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.pricing-section .pricing-toggle span.active {
+  color: #1a202c;
+  font-weight: 600;
+}
+
+.pricing-section .pricing-toggle .toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  background-color: #cbd5e0;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pricing-section .pricing-toggle .toggle-switch.annual {
+  background-color: #00a651;
+}
+
+.pricing-section .pricing-toggle .toggle-switch .toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.pricing-section .pricing-toggle .toggle-switch.annual .toggle-knob {
+  transform: translateX(22px);
+}
+
+.pricing-section .pricing-toggle .pricing-badge {
+  position: absolute;
+  right: -40px;
+  top: -10px;
+  background-color: #00a651;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transform: rotate(10deg);
+}
+
+.pricing-section .pricing-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.pricing-section .pricing-plans .pricing-plan {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.pricing-section .pricing-plans .pricing-plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-section .pricing-plans .pricing-plan.popular {
+  border: 2px solid #00a651;
+  padding-top: 3.5rem;
+}
+
+.pricing-section .pricing-plans .pricing-plan.popular .popular-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #00a651;
+  color: white;
+  text-align: center;
+  padding: 0.5rem 0;
+  font-weight: 600;
+}
+
+.pricing-section .pricing-plans .pricing-plan.popular .popular-badge svg {
+  margin-right: 0.5rem;
+  vertical-align: -0.1em;
+}
+
+.pricing-section .pricing-plans .plan-header {
+  margin-bottom: 2rem;
+}
+
+.pricing-section .pricing-plans .plan-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-section .pricing-plans .plan-header p {
+  color: #53668c;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pricing-section .pricing-plans .plan-price {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.pricing-section .pricing-plans .plan-price .currency {
+  font-size: 1.5rem;
+  vertical-align: 15px;
+  color: #1a202c;
+  font-weight: 500;
+}
+
+.pricing-section .pricing-plans .plan-price .amount {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.pricing-section .pricing-plans .plan-price .amount:after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #00a651;
+  margin: 0.5rem 0 1rem;
+}
+
+.pricing-section .pricing-plans .plan-price .period {
+  font-size: 0.95rem;
+  color: #53668c;
+  display: block;
+}
+
+.pricing-section .pricing-plans .plan-price .saving-tag {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  background-color: #e53e3e;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pricing-section .pricing-plans .plan-features {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.pricing-section .pricing-plans .plan-features li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.pricing-section .pricing-plans .plan-features li.included {
+  color: #1a202c;
+}
+
+.pricing-section .pricing-plans .plan-features li.included .feature-icon {
+  color: #00a651;
+  background-color: rgba(0, 166, 81, 0.1);
+}
+
+.pricing-section .pricing-plans .plan-features li.excluded {
+  color: #8b9bba;
+}
+
+.pricing-section .pricing-plans .plan-features li.excluded .feature-icon {
+  color: #e53e3e;
+  background-color: rgba(229, 62, 62, 0.1);
+}
+
+.pricing-section .pricing-plans .plan-features li .feature-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  font-size: 0.7rem;
+}
+
+.pricing-section .pricing-plans .plan-features li .feature-text {
+  line-height: 1.4;
+}
+
+.pricing-section .pricing-plans .plan-footer button {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pricing-section .pricing-plans .plan-footer button.primary-btn {
+  background-color: #00a651;
+  color: white;
+  border: none;
+}
+
+.pricing-section .pricing-plans .plan-footer button.primary-btn:hover {
+  background-color: #008d45;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 166, 81, 0.3);
+}
+
+.pricing-section .pricing-plans .plan-footer button.primary-btn .btn-icon {
+  transition: transform 0.3s ease;
+}
+
+.pricing-section .pricing-plans .plan-footer button.primary-btn:hover .btn-icon {
+  transform: translateX(3px);
+}
+
+.pricing-section .pricing-plans .plan-footer button.secondary-btn {
+  background-color: transparent;
+  color: #1a202c;
+  border: 2px solid #1a202c;
+}
+
+.pricing-section .pricing-plans .plan-footer button.secondary-btn:hover {
+  background-color: #1a202c;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.pricing-section .pricing-guarantee {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.pricing-section .pricing-guarantee p {
+  font-size: 1rem;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-section .pricing-guarantee .guarantee-note {
+  font-size: 0.85rem;
+  color: #53668c;
+}
+
+@media (max-width: 768px) {
+  .pricing-section {
+    padding: 60px 0;
+  }
+  .pricing-section .pricing-header h2 {
+    font-size: 2rem;
+  }
+  .pricing-section .pricing-header p {
+    font-size: 1rem;
+  }
+  .pricing-section .pricing-plans {
+    gap: 1.5rem;
+  }
+  .pricing-section .pricing-plans .pricing-plan {
+    padding: 2rem 1.5rem;
+  }
+  .pricing-section .pricing-plans .pricing-plan.popular {
+    padding-top: 3rem;
+  }
+  .pricing-section .pricing-plans .plan-header h3 {
+    font-size: 1.5rem;
+  }
+  .pricing-section .pricing-plans .plan-price .amount {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .pricing-section {
+    padding: 40px 0;
+  }
+  .pricing-section .pricing-container {
+    padding: 0 1.5rem;
+  }
+  .pricing-section .pricing-header {
+    margin-bottom: 2rem;
+  }
+  .pricing-section .pricing-header h2 {
+    font-size: 1.8rem;
+  }
+  .pricing-section .pricing-toggle {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pricing-section .pricing-toggle .pricing-badge {
+    position: static;
+    transform: none;
+    margin-left: 1rem;
+  }
+  .pricing-section .pricing-plans .pricing-plan {
+    padding: 1.5rem 1.25rem;
+  }
+  .pricing-section .pricing-plans .pricing-plan.popular {
+    padding-top: 2.5rem;
+  }
+  .pricing-section .pricing-plans .plan-header {
+    margin-bottom: 1.5rem;
+  }
+  .pricing-section .pricing-plans .plan-price {
+    margin-bottom: 1.5rem;
+  }
+  .pricing-section .pricing-plans .plan-price .currency {
+    font-size: 1.2rem;
+  }
+  .pricing-section .pricing-plans .plan-price .amount {
+    font-size: 2.5rem;
+  }
+  .pricing-section .pricing-plans .plan-features {
+    margin-bottom: 1.5rem;
+  }
+  .pricing-section .pricing-plans .plan-features li {
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .pricing-section .pricing-plans .plan-features li .feature-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 0.75rem;
+  }
+  .pricing-section .pricing-plans .plan-footer button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (hover: none) {
+  .pricing-section .pricing-plans .pricing-plan:hover {
+    transform: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  .pricing-section .pricing-plans .plan-footer button:active {
+    transform: scale(0.98);
+  }
+  .pricing-section .pricing-plans .plan-footer button.primary-btn:hover, .pricing-section .pricing-plans .plan-footer button.secondary-btn:hover {
+    transform: none;
+  }
+  .pricing-section .pricing-plans .plan-footer button.primary-btn:active {
+    background-color: #007338;
+  }
+  .pricing-section .pricing-plans .plan-footer button.secondary-btn:active {
+    background-color: rgba(26, 32, 44, 0.1);
+  }
+}

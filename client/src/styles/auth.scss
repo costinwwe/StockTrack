@@ -1,0 +1,383 @@
+@import './variables';
+@import './theme';
+
+// Variables
+$primary-color: #ffffff;
+$secondary-color: #1a202c;
+$accent-color: #00a651; // Green matching the checkmark
+$light-bg: #f7fafc;
+$border-color: #333333;
+$hover-green: #e8f5e9;
+$box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+$transition-speed: 0.3s;
+$error-color: #e53e3e;
+
+// Auth Container
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+}
+
+// Auth Form Container
+.auth-form-container {
+  flex: 1;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  @media (max-width: 991px) {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+}
+
+// Auth Sidebar
+.auth-sidebar {
+  flex: 1;
+  background-color: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background-color: rgba($primary-color, 0.1);
+    border-radius: 0 0 0 300px;
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background-color: rgba($primary-color, 0.05);
+    border-radius: 0 200px 0 0;
+    z-index: 0;
+  }
+  
+  .sidebar-content {
+    max-width: 400px;
+    padding: 3rem;
+    position: relative;
+    z-index: 1;
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      color: var(--text-secondary);
+    }
+    
+    .sidebar-icon {
+      font-size: 3rem;
+      color: $primary-color;
+      margin-bottom: 2rem;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        padding: 0.6rem 0;
+        padding-left: 2rem;
+        position: relative;
+        color: var(--text-primary);
+        
+        &::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: $primary-color;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 991px) {
+    display: none;
+  }
+}
+
+// Auth Header
+.auth-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .logo-icon {
+    position: relative;
+    font-size: 26px;
+    color: var(--text-primary);
+    padding: 3px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .logo-checkmark {
+      position: absolute;
+      top: -5px;
+      right: -8px;
+      color: $primary-color;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+  
+  .auth-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin-left: 1rem;
+  }
+  
+  .auth-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+}
+
+// Auth Error
+.auth-error {
+  background-color: rgba($error-color, 0.1);
+  color: $error-color;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+// Auth Form
+.auth-form {
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+    
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+    }
+    
+    input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 3rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all $transition-speed ease;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+      }
+      
+      &::placeholder {
+        color: var(--text-secondary);
+      }
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all $transition-speed ease;
+      
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+  
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    .remember-me {
+      display: flex;
+      align-items: center;
+      
+      input[type="checkbox"] {
+        margin-right: 0.5rem;
+        accent-color: $primary-color;
+        width: 16px;
+        height: 16px;
+      }
+      
+      label {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        
+        a {
+          color: $primary-color;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    
+    .forgot-password {
+      font-size: 0.9rem;
+      color: $primary-color;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  .auth-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: $primary-color;
+    border: none;
+    border-radius: 8px;
+    color: var(--bg-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all $transition-speed ease;
+    
+    &:hover {
+      background-color: darken($primary-color, 5%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba($primary-color, 0.3);
+    }
+    
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+// Auth Footer
+.auth-footer {
+  margin-top: 2.5rem;
+  text-align: center;
+  
+  p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+  }
+  
+  .auth-link {
+    color: $primary-color;
+    font-weight: 600;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Password Strength Component
+.password-strength {
+  margin-bottom: 1.5rem;
+  
+  .strength-bar {
+    height: 5px;
+    background-color: rgba($secondary-color, 0.1);
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    
+    .strength-indicator {
+      height: 100%;
+      border-radius: 5px;
+      transition: all $transition-speed ease;
+    }
+  }
+  
+  span {
+    font-size: 0.85rem;
+  }
+  
+  &.weak {
+    .strength-indicator {
+      background-color: $error-color;
+    }
+    span {
+      color: $error-color;
+    }
+  }
+  
+  &.medium {
+    .strength-indicator {
+      background-color: #f59e0b;
+    }
+    span {
+      color: #f59e0b;
+    }
+  }
+  
+  &.strong {
+    .strength-indicator {
+      background-color: $accent-color;
+    }
+    span {
+      color: $accent-color;
+    }
+  }
+}

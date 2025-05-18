@@ -1,0 +1,153 @@
+/* src/styles/collaboration/shared-projects.scss */
+@import './variables';
+
+.shared-projects {
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $text-color;
+    margin-bottom: 1.5rem;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .shared-project-card {
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    overflow: hidden;
+    transition: $transition;
+    
+    &:hover {
+      box-shadow: $box-shadow;
+    }
+    
+    .project-header {
+      padding: 1.25rem;
+      padding-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      
+      h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: $text-color;
+        padding-right: 1rem;
+      }
+      
+      .access-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        
+        &.view {
+          background-color: #f3f4f6;
+          color: #374151;
+        }
+        
+        &.comment {
+          background-color: #e0f2fe;
+          color: #0369a1;
+        }
+        
+        &.edit {
+          background-color: #ecfdf5;
+          color: #047857;
+        }
+      }
+    }
+    
+    .project-description {
+      padding: 0 1.25rem;
+      color: $text-secondary;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      min-height: 2.5rem;
+    }
+    
+    .project-meta {
+      padding: 0 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 0.75rem;
+      
+      > div {
+        margin-bottom: 0.5rem;
+        
+        .meta-label {
+          color: $text-secondary;
+          margin-right: 0.25rem;
+        }
+        
+        .meta-value {
+          color: $text-color;
+          font-weight: 500;
+        }
+      }
+    }
+    
+    .project-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 0.5rem;
+      padding: 1.25rem;
+      background-color: $background-color;
+      
+      .action-button {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        svg {
+          margin-right: 0.25rem;
+        }
+        
+        &.view-button {
+          background-color: $primary-color;
+          color: white;
+          
+          &:hover {
+            background-color: $primary-dark;
+          }
+        }
+        
+        &.comment-button {
+          background-color: $primary-light;
+          color: $primary-dark;
+          
+          &:hover {
+            background-color: lighten($primary-light, 5%);
+          }
+        }
+        
+        &.remove-button {
+          background-color: #fee2e2;
+          color: $error-color;
+          
+          &:hover {
+            background-color: darken(#fee2e2, 5%);
+          }
+        }
+      }
+    }
+  }
+}

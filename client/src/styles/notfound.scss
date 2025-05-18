@@ -1,0 +1,119 @@
+// Variables
+$primary-color: #ffffff;
+$secondary-color: #1a202c;
+$accent-color: #00a651;
+$red-accent: #e53e3e;
+$light-bg: #f7fafc;
+$box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+$transition-speed: 0.3s;
+
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+  background-color: $light-bg;
+  text-align: center;
+}
+
+.not-found-content {
+  max-width: 600px;
+  padding: 3rem;
+  background-color: $primary-color;
+  border-radius: 12px;
+  box-shadow: $box-shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  h1 {
+    font-size: 6rem;
+    font-weight: 700;
+    color: $red-accent;
+    margin: 0;
+    line-height: 1;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: $secondary-color;
+  }
+  
+  p {
+    color: lighten($secondary-color, 20%);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+.not-found-icon {
+  font-size: 3.5rem;
+  color: $red-accent;
+  margin-bottom: 1rem;
+}
+
+.back-home-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: $accent-color;
+  color: $primary-color;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all $transition-speed ease;
+  box-shadow: 0 4px 10px rgba($accent-color, 0.2);
+  
+  &:hover {
+    background-color: darken($accent-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba($accent-color, 0.3);
+  }
+  
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .not-found-content {
+    padding: 2rem;
+    
+    h1 {
+      font-size: 5rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  .not-found-icon {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .not-found-content {
+    padding: 1.5rem;
+    
+    h1 {
+      font-size: 4rem;
+    }
+    
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+  
+  .not-found-icon {
+    font-size: 2.5rem;
+  }
+} 

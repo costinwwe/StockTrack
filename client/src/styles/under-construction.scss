@@ -1,0 +1,156 @@
+@import './variables';
+
+.under-construction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: $spacing-xl;
+  text-align: center;
+  background-color: $background-color;
+  border-radius: $border-radius-lg;
+  margin: $spacing-lg;
+  box-shadow: $box-shadow;
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-lg;
+    margin: $spacing-md;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-md;
+    margin: $spacing-sm;
+  }
+  
+  &__icon {
+    font-size: 4rem;
+    color: $warning-color;
+    margin-bottom: $spacing-lg;
+    
+    svg {
+      width: 80px;
+      height: 80px;
+      
+      @media (max-width: $breakpoint-sm) {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    
+    &--animate {
+      animation: rotate 3s infinite linear;
+    }
+  }
+  
+  &__title {
+    font-size: 2.5rem;
+    color: $secondary-color;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-md;
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: 2rem;
+    }
+  }
+  
+  &__message {
+    font-size: 1.2rem;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto $spacing-xl;
+    line-height: 1.6;
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: 1rem;
+    }
+  }
+  
+  &__progress {
+    width: 60%;
+    height: 8px;
+    background-color: $light-color;
+    border-radius: $border-radius-lg;
+    margin-bottom: $spacing-xl;
+    position: relative;
+    overflow: hidden;
+    
+    @media (max-width: $breakpoint-md) {
+      width: 80%;
+    }
+    
+    &-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 30%;
+      background-color: $primary-color;
+      border-radius: $border-radius-lg;
+      animation: progress 2s infinite ease-in-out alternate;
+    }
+  }
+  
+  &__back-button {
+    display: inline-block;
+    padding: $spacing-sm $spacing-lg;
+    background-color: $primary-color;
+    color: $light-color;
+    font-weight: $font-weight-bold;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: $transition;
+    text-decoration: none;
+    margin-top: $spacing-lg;
+    
+    &:hover {
+      background-color: $primary-dark;
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  &__coming-soon {
+    display: inline-block;
+    padding: $spacing-xs $spacing-sm;
+    background-color: $accent-light;
+    color: $accent-dark;
+    font-size: 0.8rem;
+    font-weight: $font-weight-bold;
+    border-radius: $border-radius;
+    margin-bottom: $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  &__note {
+    font-size: 0.9rem;
+    color: $text-secondary;
+    margin-top: $spacing-lg;
+    font-style: italic;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progress {
+  0% {
+    left: 0%;
+    width: 30%;
+  }
+  100% {
+    left: 70%;
+    width: 30%;
+  }
+}

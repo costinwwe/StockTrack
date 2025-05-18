@@ -1,0 +1,158 @@
+/* src/styles/collaboration/team-list.scss */
+@import './variables';
+
+.team-list {
+  .team-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $text-color;
+    }
+    
+    .small-button {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: $border-radius;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      
+      svg {
+        margin-right: 0.5rem;
+      }
+      
+      &:hover {
+        background-color: $primary-dark;
+      }
+    }
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .team-card {
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    overflow: hidden;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: $transition;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $box-shadow;
+    }
+    
+    .team-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: $text-color;
+      }
+      
+      .owner-badge {
+        background-color: $primary-light;
+        color: $primary-dark;
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    }
+    
+    .team-description {
+      color: $text-secondary;
+      margin-bottom: 1.5rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      min-height: 3rem;
+    }
+    
+    .team-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        .stat-value {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: $text-color;
+        }
+        
+        .stat-label {
+          font-size: 0.875rem;
+          color: $text-secondary;
+        }
+      }
+    }
+    
+    .team-members-preview {
+      display: flex;
+      align-items: center;
+      
+      .member-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: $primary-light;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 500;
+        margin-right: -10px;
+        border: 2px solid white;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+      
+      .member-count {
+        background-color: $background-color;
+        color: $text-secondary;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border: 2px solid white;
+      }
+    }
+  }
+}

@@ -1,0 +1,226 @@
+/* 
+  Responsive styles for the entire application
+  Using standard breakpoints:
+  - xs: Extra small devices (phones, less than 576px)
+  - sm: Small devices (large phones, 576px and up)
+  - md: Medium devices (tablets, 768px and up)
+  - lg: Large devices (desktops, 992px and up)
+  - xl: Extra large devices (large desktops, 1200px and up)
+  - xxl: Extra extra large devices (larger desktops, 1400px and up)
+*/
+
+// Variables
+$xs-breakpoint: 576px;
+$sm-breakpoint: 576px;
+$md-breakpoint: 768px;
+$lg-breakpoint: 992px;
+$xl-breakpoint: 1200px;
+$xxl-breakpoint: 1400px;
+
+// Extra Small Devices (phones, less than 576px)
+@media (max-width: 575px) {
+  // Navbar styles
+  .navbar {
+    padding: 0 1rem;
+    
+    .navbar-container {
+      padding: 0 1rem;
+    }
+    
+    .navbar-logo img {
+      height: 32px;
+    }
+    
+    .mobile-menu {
+      &.active {
+        height: calc(100vh - 70px);
+      }
+    }
+    
+    .mobile-dropdown-menu {
+      margin: 0 0.5rem;
+      
+      .dropdown-item {
+        padding: 0.5rem;
+        margin: 0.25rem;
+      }
+    }
+  }
+}
+
+// Small Devices (large phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767px) {
+  // Navbar styles
+  .navbar {
+    .navbar-container {
+      padding: 0 1.5rem;
+    }
+    
+    .mobile-menu {
+      &.active {
+        padding: 1.5rem 0;
+      }
+    }
+  }
+}
+
+// Medium Devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991px) {
+  // Navbar styles
+  .navbar {
+    .nav-menu.desktop {
+      display: none;
+    }
+    
+    .mobile-menu-icon {
+      display: flex;
+    }
+    
+    .mobile-menu {
+      display: block;
+    }
+    
+    .mobile-menu-overlay {
+      display: block;
+    }
+  }
+}
+
+// Large Devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199px) {
+  // Navbar styles
+  .navbar {
+    .nav-menu.desktop {
+      display: flex;
+    }
+    
+    .mobile-menu-icon {
+      display: none;
+    }
+    
+    .mobile-menu {
+      display: none;
+    }
+    
+    .mobile-menu-overlay {
+      display: none;
+    }
+    
+    .nav-item {
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+// Extra Large Devices (large desktops, 1200px and up)
+@media (min-width: 1200px) and (max-width: 1399px) {
+  // Navbar styles
+  .navbar {
+    .navbar-container {
+      max-width: 1140px;
+    }
+    
+    .nav-item {
+      margin: 0 0.75rem;
+    }
+  }
+}
+
+// Extra Extra Large Devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {
+  // Navbar styles
+  .navbar {
+    .navbar-container {
+      max-width: 1320px;
+    }
+    
+    .nav-item {
+      margin: 0 1rem;
+    }
+  }
+}
+
+// Portrait Phones
+@media (max-width: 575px) and (orientation: portrait) {
+  .navbar {
+    height: 70px;
+    
+    &.scrolled {
+      height: 60px;
+    }
+    
+    .mobile-dropdown-toggle {
+      padding: 0.5rem;
+    }
+  }
+}
+
+// Landscape Phones
+@media (max-width: 767px) and (orientation: landscape) {
+  .navbar {
+    height: 60px;
+    
+    &.scrolled {
+      height: 50px;
+    }
+    
+    .mobile-menu {
+      &.active {
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+      }
+    }
+  }
+}
+
+// iPads and Tablets Portrait
+@media (min-width: 768px) and (max-width: 991px) and (orientation: portrait) {
+  .navbar {
+    .navbar-container {
+      padding: 0 2rem;
+    }
+  }
+}
+
+// iPads and Tablets Landscape
+@media (min-width: 768px) and (max-width: 991px) and (orientation: landscape) {
+  .navbar {
+    .mobile-menu {
+      &.active {
+        height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        
+        .nav-menu.mobile {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          width: 100%;
+          
+          .nav-item {
+            width: auto;
+            margin: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Foldable Devices
+@media (max-width: 280px) {
+  .navbar {
+    .navbar-logo img {
+      height: 24px;
+    }
+    
+    .mobile-menu-icon {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

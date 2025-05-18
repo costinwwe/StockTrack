@@ -1,0 +1,235 @@
+// collaboration-hub.scss - Adapted for your color scheme
+@import './variables';
+
+// Main container
+.collaboration-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  
+  @media (max-width: $breakpoint-md) {
+    padding: 1rem;
+  }
+}
+
+// Header styles
+.collaboration-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: $font-weight-bold;
+    color: $text-color;
+    margin-bottom: 0.5rem;
+    
+    @media (max-width: $breakpoint-md) {
+      font-size: 2rem;
+    }
+  }
+  
+  p {
+    color: $text-secondary;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .header-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    
+    button {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: $border-radius;
+      font-weight: $font-weight-bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: $transition-base;
+      
+      svg {
+        margin-right: 0.5rem;
+      }
+      
+      &.create-team-btn {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        
+        &:hover {
+          background-color: $primary-dark;
+        }
+      }
+      
+      &.share-project-btn {
+        background-color: $accent-color;
+        color: white;
+        border: none;
+        
+        &:hover {
+          background-color: $accent-dark;
+        }
+        
+        &:disabled {
+          background-color: #cbd5e1;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+// Error message
+.error-message {
+  background-color: lighten($danger-color, 35%);
+  color: $danger-color;
+  padding: 1rem;
+  border-radius: $border-radius;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  button {
+    background: none;
+    border: none;
+    color: $primary-color;
+    cursor: pointer;
+    font-weight: $font-weight-bold;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Tab navigation
+.collaboration-tabs {
+  display: flex;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 2rem;
+  
+  .tab-button {
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 1rem;
+    font-weight: $font-weight-bold;
+    color: $text-secondary;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    
+    svg {
+      margin-right: 0.5rem;
+    }
+    
+    &.active {
+      color: $primary-color;
+      border-bottom-color: $primary-color;
+    }
+    
+    &:hover:not(.active) {
+      color: $text-color;
+    }
+    
+    @media (max-width: $breakpoint-sm) {
+      padding: 0.75rem;
+      font-size: 0.875rem;
+      
+      svg {
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}
+
+// Content area
+.collaboration-content {
+  min-height: 400px;
+}
+
+// Loading state
+.collaboration-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: $primary-color;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: $text-secondary;
+    font-size: 1.1rem;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Empty state
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  
+  .empty-icon {
+    font-size: 3rem;
+    color: $text-secondary;
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0.5rem;
+    color: $text-color;
+  }
+  
+  p {
+    color: $text-secondary;
+    margin-bottom: 1.5rem;
+  }
+  
+  button {
+    padding: 0.75rem 1.5rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    
+    svg {
+      margin-right: 0.5rem;
+    }
+    
+    &:hover {
+      background-color: $primary-dark;
+    }
+  }
+}

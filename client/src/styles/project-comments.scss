@@ -1,0 +1,128 @@
+/* src/styles/collaboration/project-comments.scss */
+@import './variables';
+
+.project-comments {
+  .no-comments {
+    padding: 3rem;
+    text-align: center;
+    color: $text-secondary;
+    background-color: $background-color;
+    border-radius: $border-radius;
+  }
+  
+  .comments-list {
+    margin-bottom: 2rem;
+    
+    .comment-item {
+      display: flex;
+      margin-bottom: 1.5rem;
+      
+      .comment-avatar {
+        margin-right: 1rem;
+        
+        img, .avatar-placeholder {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        
+        .avatar-placeholder {
+          background-color: $primary-light;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+      }
+      
+      .comment-content {
+        flex: 1;
+        background-color: $background-color;
+        padding: 1rem;
+        border-radius: $border-radius;
+        
+        .comment-header {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 0.5rem;
+          
+          .comment-author {
+            font-weight: 600;
+            color: $text-color;
+          }
+          
+          .comment-date {
+            font-size: 0.75rem;
+            color: $text-secondary;
+          }
+        }
+        
+        .comment-text {
+          color: $text-color;
+        }
+      }
+    }
+  }
+  
+  .comment-form-container {
+    background-color: $background-color;
+    border-radius: $border-radius;
+    padding: 1rem;
+    
+    .comment-form {
+      display: flex;
+      gap: 1rem;
+      
+      .comment-input {
+        flex: 1;
+        
+        textarea {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid $border-color;
+          border-radius: $border-radius;
+          resize: vertical;
+          
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+          }
+        }
+      }
+      
+      .submit-comment {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: $border-radius;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        align-self: flex-start;
+        
+        &:hover {
+          background-color: $primary-dark;
+        }
+        
+        &:disabled {
+          background-color: #cbd5e1;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  
+  .comment-restricted {
+    padding: 1rem;
+    background-color: $background-color;
+    border-radius: $border-radius;
+    text-align: center;
+    color: $text-secondary;
+  }
+}
