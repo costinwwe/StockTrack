@@ -2,7 +2,10 @@
 import axios from 'axios';
 
 // Backend URL - change this to your backend server address
-const BACKEND_URL = 'http://localhost:5000'; // Update with your server address
+const BACKEND_URL = import.meta.env.PROD 
+  ? '/api' // In production, use relative path (will be redirected by Netlify)
+  : 'http://localhost:5000'; // In development
+
 
 // Create the API instance with direct backend URL
 const api = axios.create({

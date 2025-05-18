@@ -9,7 +9,12 @@
     "build": "cd client && npm run build",
     "deploy": "netlify deploy --prod"
   },
-  "keywords": ["inventory", "management", "stock", "tracking"],
+  "keywords": [
+    "inventory",
+    "management",
+    "stock",
+    "tracking"
+  ],
   "author": "Costin",
   "license": "MIT",
   "type": "commonjs",
@@ -24,6 +29,7 @@
     "mongoose": "^8.14.3",
     "multer": "^1.4.5-lts.2",
     "nodemailer": "^6.10.1",
+    "serverless-http": "^3.2.0",
     "stripe": "^18.1.0"
   },
   "devDependencies": {
