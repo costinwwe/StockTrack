@@ -1,143 +1,104 @@
-# StockTrack
+# Stock Tracker Application
 
-A modern inventory management system built with React, Node.js, and MongoDB.
+A full-stack application for tracking and managing inventory/stock with user authentication and subscription features.
 
 ## Features
 
-- 📊 Real-time inventory tracking
-- 🔐 User authentication and authorization
-- 💳 PRO subscription system with Stripe integration
-- 🌙 Dark mode support
-- 📱 Responsive design
-- 📈 Analytics and reporting
-- 🔔 Email notifications
+- User authentication and authorization
+- Inventory/Stock management
+- Subscription-based access using Stripe
+- Email notifications
+- Responsive design
 
 ## Tech Stack
 
-- **Frontend**: React, Vite, SCSS
-- **Backend**: Node.js, Express
-- **Database**: MongoDB
-- **Authentication**: JWT
-- **Payment**: Stripe
-- **Email**: Nodemailer
-
-## Deployment (Netlify)
-
-### 1. Prerequisites
-- Make sure you have a Netlify account: https://app.netlify.com/
-- Your repository should have the following structure:
-  ```
-  client/
-  server/
-  netlify.toml
-  ```
-
-### 2. Environment Variables
-Set these in Netlify:
-- `MONGODB_URI`
-- `JWT_SECRET`
-- `STRIPE_SECRET_KEY`
-- `STRIPE_PUBLISHABLE_KEY`
-- `STRIPE_WEBHOOK_SECRET`
-- Any others your app requires
-
-### 3. Deploy
-1. Go to [Netlify](https://app.netlify.com/)
-2. Click "Add new site" > "Import an existing project"
-3. Choose GitHub and select your repository
-4. Configure the build settings:
-   - Base directory: `client`
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-5. Click "Deploy site"
-
-### 4. Serverless Functions
-- Your backend API routes are automatically converted to serverless functions
-- They will be available at `/.netlify/functions/api/*`
-
-## Local Development
-
-### Prerequisites
-- Node.js (v14 or higher)
+### Backend
+- Node.js
+- Express.js
 - MongoDB
-- npm or yarn
+- JWT Authentication
+- Stripe Integration
+- Nodemailer
 
-### Installation
+### Frontend
+- React.js
+- React Router
+- Axios
+- Stripe.js
 
-1. Clone the repository:
-```bash
-git clone https://github.com/costinwwe/StockTrack.git
-cd StockTrack
+## Prerequisites
+
+- Node.js (>=14.0.0)
+- MongoDB
+- Stripe Account
+- Email Service Account
+
+## Environment Variables
+
+Create a `config.env` file in the `server/config` directory with the following variables:
+
+```env
+PORT=5000
+NODE_ENV=development
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRE=30d
+EMAIL_SERVICE=your_email_service
+EMAIL_USERNAME=your_email
+EMAIL_PASSWORD=your_email_password
+EMAIL_FROM=your_from_email
+CLIENT_URL=http://localhost:3000
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+STRIPE_MONTHLY_PRICE_ID=your_stripe_monthly_price_id
+STRIPE_YEARLY_PRICE_ID=your_stripe_yearly_price_id
 ```
 
-2. Install dependencies:
+## Installation
+
+1. Clone the repository
 ```bash
-# Install server dependencies
+git clone https://github.com/yourusername/stock-tracker.git
+cd stock-tracker
+```
+
+2. Install backend dependencies
+```bash
 cd server
 npm install
+```
 
-# Install client dependencies
+3. Install frontend dependencies
+```bash
 cd ../client
 npm install
 ```
 
-3. Set up environment variables:
-   - Copy `.env.example` to `.env` in the server directory
-   - Update the variables with your configuration
+## Running the Application
 
-4. Start the development servers:
+1. Start the backend server
 ```bash
-# Start server (from server directory)
-npm run dev
-
-# Start client (from client directory)
+cd server
 npm run dev
 ```
 
-## Environment Variables
-
-Create a `.env` file in the server directory with the following variables:
-
-```env
-# Server Configuration
-PORT=5000
-NODE_ENV=development
-
-# MongoDB Connection
-MONGO_URI=your_mongodb_uri
-
-# JWT Configuration
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRE=30d
-
-# Email Configuration
-EMAIL_SERVICE=gmail
-EMAIL_USERNAME=your_email
-EMAIL_PASSWORD=your_password
-EMAIL_FROM=noreply@stocktrack.com
-
-# Client URL
-CLIENT_URL=http://localhost:3000
-
-# Stripe Configuration
-STRIPE_SECRET_KEY=your_stripe_secret_key
-STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+2. Start the frontend development server
+```bash
+cd client
+npm start
 ```
 
-## Contributing
+## Deployment
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+The application can be deployed on Render:
+- Backend: Web Service
+- Frontend: Static Site
 
 ## License
+
 MIT
 
-## Contact
+## Author
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter)
-
-Project Link: [https://github.com/costinwwe/StockTrack](https://github.com/costinwwe/StockTrack) 
+Costin 
